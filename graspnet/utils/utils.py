@@ -5,12 +5,12 @@ import math
 import time
 import trimesh.transformations as tra
 import json
-from utils import sample
+from graspnet.utils import sample
 import torch
 import yaml
 from easydict import EasyDict as edict
 
-GRIPPER_PC = np.load('gripper_models/panda_pc.npy',
+GRIPPER_PC = np.load('/home/colin/software/graspnet/gripper_models/panda_pc.npy',
                      allow_pickle=True).item()['points']
 GRIPPER_PC[:, 3] = 1.
 
@@ -27,15 +27,15 @@ def farthest_points(data,
         data: numpy array of the data points.
         nclusters: int, number of clusters.
         dist_dunc: distance function that is used to compare two data points.
-        return_center_indexes: bool, If True, returns the indexes of the center of 
+        return_center_indexes: bool, If True, returns the indexes of the center of
           clusters.
         return_distances: bool, If True, return distances of each point from centers.
-      
+
       Returns clusters, [centers, distances]:
-        clusters: numpy array containing the cluster index for each element in 
+        clusters: numpy array containing the cluster index for each element in
           data.
         centers: numpy array containing the integer index of each center.
-        distances: numpy array of [npoints] that contains the closest distance of 
+        distances: numpy array of [npoints] that contains the closest distance of
           each point to any of the cluster centers.
     """
     if nclusters >= data.shape[0]:
@@ -284,7 +284,7 @@ def get_control_point_tensor(batch_size, use_torch=True, device="cpu"):
       Outputs a tensor of shape (batch_size x 6 x 3).
       use_tf: switches between outputing a tensor and outputing a numpy array.
     """
-    control_points = np.load('./gripper_control_points/panda.npy')[:, :3]
+    control_points = np.load('/home/colin/software/graspnet/gripper_control_points/panda.npy')[:, :3]
     control_points = [[0, 0, 0], [0, 0, 0], control_points[0, :],
                       control_points[1, :], control_points[-2, :],
                       control_points[-1, :]]
@@ -301,7 +301,7 @@ def get_control_point_tensor(batch_size, use_torch=True, device="cpu"):
 def transform_control_points(gt_grasps, batch_size, mode='qt', device="cpu"):
     """
       Transforms canonical points using gt_grasps.
-      mode = 'qt' expects gt_grasps to have (batch_size x 7) where each 
+      mode = 'qt' expects gt_grasps to have (batch_size x 7) where each
         element is catenation of quaternion and translation for each
         grasps.
       mode = 'rt': expects to have shape (batch_size x 4 x 4) where
@@ -338,7 +338,7 @@ def transform_control_points(gt_grasps, batch_size, mode='qt', device="cpu"):
 def transform_control_points_numpy(gt_grasps, batch_size, mode='qt'):
     """
       Transforms canonical points using gt_grasps.
-      mode = 'qt' expects gt_grasps to have (batch_size x 7) where each 
+      mode = 'qt' expects gt_grasps to have (batch_size x 7) where each
         element is catenation of quaternion and translation for each
         grasps.
       mode = 'rt': expects to have shape (batch_size x 4 x 4) where
@@ -404,9 +404,9 @@ def conj_quaternion(q):
 def rotate_point_by_quaternion(point, q, device="cpu"):
     """
       Takes in points with shape of (batch_size x n x 3) and quaternions with
-      shape of (batch_size x n x 4) and returns a tensor with shape of 
+      shape of (batch_size x n x 4) and returns a tensor with shape of
       (batch_size x n x 3) which is the rotation of the point with quaternion
-      q. 
+      q.
     """
     shape = point.shape
     q_shape = q.shape
@@ -649,8 +649,8 @@ def qrot(q, v):
 
 
 def get_inlier_grasp_indices(grasp_list, query_point, threshold=1.0, device="cpu"):
-    """This function returns all grasps whose distance between the mid of the finger tips and the query point is less than the threshold value. 
-    
+    """This function returns all grasps whose distance between the mid of the finger tips and the query point is less than the threshold value.
+
     Arguments:
         grasps are given as a list of [B,7] where B is the number of grasps and the other
         7 values represent teh quaternion and translation.

@@ -1,7 +1,7 @@
 import torch
 from . import networks
 from os.path import join
-import utils.utils as utils
+import graspnet.utils.utils as utils
 
 
 class GraspNetModel:

@@ -2,15 +2,15 @@ from __future__ import print_function
 
 import numpy as np
 import argparse
-import grasp_estimator
+from graspnet import grasp_estimator
 import sys
 import os
 import glob
 import mayavi.mlab as mlab
-from utils.visualization_utils import *
+from graspnet.utils.visualization_utils import *
 import mayavi.mlab as mlab
-from utils import utils
-from data import DataLoader
+from graspnet.utils import utils
+from graspnet.data import DataLoader
 
 
 def make_parser():

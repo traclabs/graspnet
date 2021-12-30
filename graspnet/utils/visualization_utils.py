@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 import mayavi.mlab as mlab
-from utils import utils, sample
+from graspnet.utils import utils, sample
 import numpy as np
 import trimesh
 
@@ -42,23 +42,23 @@ def draw_scene(pc,
     Args:
       pc: point cloud of the object
       grasps: list of 4x4 numpy array indicating the transformation of the grasps.
-        grasp_scores: grasps will be colored based on the scores. If left 
+        grasp_scores: grasps will be colored based on the scores. If left
         empty, grasps are visualized in green.
       grasp_color: if it is a tuple, sets the color for all the grasps. If list
         is provided it is the list of tuple(r,g,b) for each grasp.
-      mesh: If not None, shows the mesh of the object. Type should be trimesh 
+      mesh: If not None, shows the mesh of the object. Type should be trimesh
          mesh.
-      show_gripper_mesh: If True, shows the gripper mesh for each grasp. 
-      grasp_selection: if provided, filters the grasps based on the value of 
+      show_gripper_mesh: If True, shows the gripper mesh for each grasp.
+      grasp_selection: if provided, filters the grasps based on the value of
         each selection. 1 means select ith grasp. 0 means exclude the grasp.
-      visualize_diverse_grasps: sorts the grasps based on score. Selects the 
+      visualize_diverse_grasps: sorts the grasps based on score. Selects the
         top score grasp to visualize and then choose grasps that are not within
         min_seperation_distance distance of any of the previously selected
         grasps. Only set it to True to declutter the grasps for better
         visualization.
-      pc_color: if provided, should be a n x 3 numpy array for color of each 
+      pc_color: if provided, should be a n x 3 numpy array for color of each
         point in the point cloud pc. Each number should be between 0 and 1.
-      plasma_coloring: If True, sets the plasma colormap for visualizting the 
+      plasma_coloring: If True, sets the plasma colormap for visualizting the
         pc.
     """
 

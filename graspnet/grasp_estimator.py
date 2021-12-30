@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from models import create_model
+from graspnet.models import create_model
 import numpy as np
 import torch
 import time
@@ -9,7 +9,7 @@ import trimesh.transformations as tra
 #import surface_normal
 import copy
 import os
-from utils import utils
+from graspnet.utils import utils
 
 
 class GraspEstimator:

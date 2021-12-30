@@ -4,10 +4,10 @@ import pickle
 import os
 import copy
 import json
-from utils.sample import Object
-from utils import utils
+from graspnet.utils.sample import Object
+from graspnet.utils import utils
 import glob
-from renderer.online_object_renderer import OnlineObjectRenderer
+from graspnet.renderer.online_object_renderer import OnlineObjectRenderer
 import threading
 
 
@@ -78,7 +78,7 @@ class BaseDataset(data.Dataset):
 
     def render_random_scene(self, camera_pose=None):
         """
-          Renders a random view and return (pc, camera_pose, object_pose). 
+          Renders a random view and return (pc, camera_pose, object_pose).
           object_pose is None for single object per scene.
         """
         if camera_pose is None:
@@ -143,7 +143,7 @@ class BaseDataset(data.Dataset):
                                ratio_of_grasps_to_be_used=1.,
                                return_all_grasps=False):
         """
-        Reads the grasps from the json path and loads the mesh and all the 
+        Reads the grasps from the json path and loads the mesh and all the
         grasps.
         """
         num_clusters = self.opt.num_grasp_clusters

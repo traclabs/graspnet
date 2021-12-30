@@ -5,8 +5,8 @@ import numpy as np
 import copy
 import cv2
 import h5py
-import utils.sample as sample
-import utils.utils as utils
+import graspnet.utils.sample as sample
+import graspnet.utils.utils as utils
 import math
 import sys
 import argparse
@@ -26,7 +26,7 @@ class OnlineObjectRenderer:
     def __init__(self, fov=np.pi / 6, caching=True):
         """
         Args:
-          fov: float, 
+          fov: float,
         """
         self._fov = fov
         self._fy = self._fx = 1 / (0.5 / np.tan(self._fov * 0.5)
