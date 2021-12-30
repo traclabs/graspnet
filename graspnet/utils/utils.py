@@ -10,7 +10,7 @@ import torch
 import yaml
 from easydict import EasyDict as edict
 
-GRIPPER_PC = np.load('/home/colin/software/graspnet/gripper_models/panda_pc.npy',
+GRIPPER_PC = np.load('~/software/graspnet/gripper_models/panda_pc.npy',
                      allow_pickle=True).item()['points']
 GRIPPER_PC[:, 3] = 1.
 
@@ -284,7 +284,7 @@ def get_control_point_tensor(batch_size, use_torch=True, device="cpu"):
       Outputs a tensor of shape (batch_size x 6 x 3).
       use_tf: switches between outputing a tensor and outputing a numpy array.
     """
-    control_points = np.load('/home/colin/software/graspnet/gripper_control_points/panda.npy')[:, :3]
+    control_points = np.load('~/software/graspnet/gripper_control_points/panda.npy')[:, :3]
     control_points = [[0, 0, 0], [0, 0, 0], control_points[0, :],
                       control_points[1, :], control_points[-2, :],
                       control_points[-1, :]]
